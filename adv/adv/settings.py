@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-8brdj^^q^1#7*-kih0ge)w*yu7n)2@#)x8++m2o%&a^c&ly0=@
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ['https://developeradvocates-production.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://developeradvocates-production.up.railway.app']
 
 
 # Application definition
@@ -41,9 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    '**corsheaders.middleware.CorsMiddleware**'
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
