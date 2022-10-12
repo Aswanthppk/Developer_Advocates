@@ -1,7 +1,7 @@
 from audioop import maxpp
 from os import name
 from random import choices
-from tkinter import CASCADE
+#from tkinter import CASCADE
 from unittest.util import _MAX_LENGTH
 from django.db import models
 
