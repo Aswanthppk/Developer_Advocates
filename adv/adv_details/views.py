@@ -22,7 +22,7 @@ def Index_view(request):
     for data in serializer.data:
         company_id=data['company']
         youtube=Adevactes.objects.filter(id=data['id'])
-        print(data['profile_pic'].url)
+        #print(data['profile_pic'].url)
         company_serializer=Company_Serializer(Company.objects.filter(id=data['company']),many=True)
         print(data['id'])
         data['company']=company_serializer.data[0]
