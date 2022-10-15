@@ -12,7 +12,8 @@ from .models import Adevactes,Company
 def Index_view(request):
     sample = Adevactes.objects.all()
     
-    
+    url=sample[0].profile_pic.url
+    print(url)
     twitter=Adevactes.objects.values_list('twitter',flat=True)
     github=Adevactes.objects.values_list('github',flat=True)
     print(sample.values_list('company'))
