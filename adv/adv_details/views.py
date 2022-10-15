@@ -63,6 +63,7 @@ def Companey_view(request):
     print(companey.values())
     serializer=Company_Serializer_details(companey,many=True)
     for data in serializer.data:
+        data['logo']='https://developeradvocates-production.up.railway.app/{}'.format(data['logo'])
         adv=Adevactes.objects.filter(company=data['id'])
         adv_serializer=Advactes_compnay_Serializer(adv,many=True)
         data['Advacates']=adv_serializer.data[0]
@@ -75,6 +76,7 @@ def Companey_detailview(request,pk):
     companey= Company.objects.filter(id=pk)
     serializer=Company_Serializer_details(companey,many=True)
     for data in serializer.data:
+        data['logo']='https://developeradvocates-production.up.railway.app/{}'.format(data['logo'])
         adv=Adevactes.objects.filter(company=data['id'])
         adv_serializer=Advactes_compnay_Serializer(adv,many=True)
         data['Advacates']=adv_serializer.data[0]
