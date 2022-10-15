@@ -21,6 +21,7 @@ def Index_view(request):
     company=Company.objects.filter(id=serializer.data[0]['company'])
     print(company)
     for data in serializer.data:
+        data['profile_pic']='https://developeradvocates-production.up.railway.app{}'.format(data['profile_pic'])
         company_id=data['company']
         youtube=Adevactes.objects.filter(id=data['id'])
         #print(data['profile_pic'].url)
