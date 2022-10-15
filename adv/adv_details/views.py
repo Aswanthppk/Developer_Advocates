@@ -65,18 +65,19 @@ def Companey_view(request):
     for data in serializer.data:
         adv=Adevactes.objects.filter(company=data['id'])
         adv_serializer=Advactes_compnay_Serializer(adv,many=True)
-        data['Advacates']=adv_serializer.data
+        data['Advacates']=adv_serializer.data[0]
         data['Advacates']['profile_pic']='https://developeradvocates-production.up.railway.app{}'.format(data['Advacates']['profile_pic'])
     
     return Response(serializer.data)
 @api_view(['GET'])
 def Companey_detailview(request,pk):
+
     companey= Company.objects.filter(id=pk)
     serializer=Company_Serializer_details(companey,many=True)
     for data in serializer.data:
         adv=Adevactes.objects.filter(company=data['id'])
         adv_serializer=Advactes_compnay_Serializer(adv,many=True)
-        data['Advacates']=adv_serializer.data
+        data['Advacates']=adv_serializer.data[0]
         data['Advacates']['profile_pic']='https://developeradvocates-production.up.railway.app{}'.format(data['Advacates']['profile_pic'])
     
     return Response(serializer.data[0])
