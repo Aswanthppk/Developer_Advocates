@@ -28,6 +28,7 @@ def Index_view(request):
         company_serializer=Company_Serializer(Company.objects.filter(id=data['company']),many=True)
         print(data['id'])
         data['company']=company_serializer.data[0]
+        data['company']['logo']='https://developeradvocates-production.up.railway.app/{}'.format(data['company']['logo'])
         data['company']['herf']='https://developeradvocates-production.up.railway.app/companies/{}'.format(company_id)
         data['links']={'youtube':youtube.values_list('youtube',flat=True)[0],'twitter':youtube.values_list('twitter',flat=True)[0],'github':youtube.values_list('github',flat=True)[0]}
 
@@ -41,13 +42,15 @@ def details_view(request,pk):
     serializer=Advactes_Serializer(adv,many=True)
     company=Company.objects.filter(id=serializer.data[0]['company'])
     for data in serializer.data:
+        data['profile_pic']='https://developeradvocates-production.up.railway.app{}'.format(data['profile_pic'])
         youtube=Adevactes.objects.filter(id=data['id'])
         company_id=data['company']
         print(youtube.values('youtube'))
         company_serializer=Company_Serializer(Company.objects.filter(id=data['company']),many=True)
         #print(company_serializer.data[0]['herf'])
         data['company']=company_serializer.data[0]
-        data['company']['herf']='/companies/{}'.format(company_id)
+        data['company']['logo']='https://developeradvocates-production.up.railway.app/{}'.format(data['company']['logo'])
+        data['company']['herf']='https://developeradvocates-production.up.railway.app/companies/{}'.format(company_id)
         data['links']={'youtube':youtube.values_list('youtube',flat=True)[0],'twitter':youtube.values_list('twitter',flat=True)[0],'github':youtube.values_list('github',flat=True)[0]}
 
         
@@ -63,6 +66,7 @@ def Companey_view(request):
         adv=Adevactes.objects.filter(company=data['id'])
         adv_serializer=Advactes_compnay_Serializer(adv,many=True)
         data['Advacates']=adv_serializer.data
+        data['Advacates']['profile_pic']='https://developeradvocates-production.up.railway.app{}'.format(data['Advacates']['profile_pic'])
     
     return Response(serializer.data)
 @api_view(['GET'])
@@ -73,6 +77,7 @@ def Companey_detailview(request,pk):
         adv=Adevactes.objects.filter(company=data['id'])
         adv_serializer=Advactes_compnay_Serializer(adv,many=True)
         data['Advacates']=adv_serializer.data
+        data['Advacates']['profile_pic']='https://developeradvocates-production.up.railway.app{}'.format(data['Advacates']['profile_pic'])
     
     return Response(serializer.data[0])
 
