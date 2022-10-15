@@ -35,12 +35,14 @@ def Index_view(request):
     else:
         sample = Adevactes.objects.all()
         
-        
+        paginator = PageNumberPagination()
+        paginator.page_size = 5
         
         twitter=Adevactes.objects.values_list('twitter',flat=True)
         github=Adevactes.objects.values_list('github',flat=True)
         print(sample.values_list('company'))
-        serializer=Advactes_Serializer(sample,many=True)
+        qu=paginator.paginate_queryset(sample,request)
+        serializer=Advactes_Serializer(qu,many=True)
         company=Company.objects.filter(id=serializer.data[0]['company'])
         print(company)
         for data in serializer.data:
@@ -57,7 +59,7 @@ def Index_view(request):
 
             
 
-        return Response(serializer.data)
+        return paginator.get_paginated_response(serializer.data)
 
 @api_view(['GET'])
 def details_view(request,pk):
